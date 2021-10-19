@@ -7,11 +7,14 @@ import (
 )
 
 func main() {
-
+	httpMethod := "GET"
 	url := "https://api.github.com"
-
 	client := http.Client{}
-	response, err := client.Get(url)
+
+	request, err := http.NewRequest(httpMethod, url, nil)
+	request.Header.Set("Accept", "application/xml")
+
+	response, err := client.Do(request)
 	if err != nil {
 		panic(err)
 	}
@@ -23,7 +26,5 @@ func main() {
 	}
 
 	fmt.Println(response.StatusCode)
-
 	fmt.Println(string(bytes))
 }
-
