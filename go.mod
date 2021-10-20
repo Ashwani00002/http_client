@@ -1,3 +1,3 @@
-module http_client
+module github.com/Ashwani00002/http_client
 
 go 1.17

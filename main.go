@@ -3,28 +3,20 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"net/http"
+
+	"github.com/Ashwani00002/http_client/gohttp"
 )
 
 func main() {
-	httpMethod := "GET"
-	url := "https://api.github.com"
-	client := http.Client{}
+	client := gohttp.New()
 
-	request, err := http.NewRequest(httpMethod, url, nil)
-	request.Header.Set("Accept", "application/xml")
-
-	response, err := client.Do(request)
+	response, err := client.Get("https://api.github.com", nil)
 	if err != nil {
 		panic(err)
 	}
-
-	defer response.Body.Close()
-	bytes, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		panic(err)
-	}
-
 	fmt.Println(response.StatusCode)
+
+	bytes, _ := ioutil.ReadAll(response.Body)
 	fmt.Println(string(bytes))
+
 }
