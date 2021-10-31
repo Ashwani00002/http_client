@@ -19,7 +19,7 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 
 }
 
-func (c *httpClient) getRequestHeaders(requestHeaders http.Header) *http.Header {
+func (c *httpClient) getRequestHeaders(requestHeaders http.Header) http.Header {
 
 	result := make(http.Header)
 
@@ -38,5 +38,5 @@ func (c *httpClient) getRequestHeaders(requestHeaders http.Header) *http.Header 
 		}
 
 	}
-	return &result
+	return result
 }
