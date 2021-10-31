@@ -9,15 +9,20 @@ import (
 )
 
 var (
-	httpClient = gohttp.New()
+	githubHttpClient = getGithubClient()
 )
+
+func getGithubClient() gohttp.HttpClient {
+	client := gohttp.New()
+	commonHeaders := make(http.Header)
+	commonHeaders.Set("Authorization", "Bearer ABC-123")
+	client.SetHeaders(commonHeaders)
+	return client
+}
 
 func main() {
 
-	headers := make(http.Header)
-	headers.Set("Authorization", "Bearer ABC-123")
-
-	response, err := httpClient.Get("https://api.github.com", headers)
+	response, err := githubHttpClient.Get("https://api.github.com", nil)
 	if err != nil {
 		panic(err)
 	}
